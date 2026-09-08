@@ -1,0 +1,27 @@
+FROM --platform=linux/amd64 debian:bookworm-slim
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends ca-certificates curl xz-utils make file && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /build
+
+RUN curl -fL --retry 3 \
+        "https://github.com/cross-tools/musl-cross/releases/download/20260823/arm-unknown-linux-musleabi.tar.xz" \
+        -o toolchain.tar.xz && \
+    echo "d9542873fbe7a2239418d1a2798ef3dece6f0679ba218721880b25a051e61cfd  toolchain.tar.xz" | sha256sum -c - && \
+    tar -xJf toolchain.tar.xz && \
+    curl -fL --retry 3 \
+        "https://github.com/tinyalsa/tinyalsa/archive/refs/tags/v2.0.0.tar.gz" \
+        -o tinyalsa.tar.gz && \
+    tar -xzf tinyalsa.tar.gz && \
+    cd tinyalsa-2.0.0 && \
+    make -C src -j"$(nproc)" \
+        CROSS_COMPILE=/build/arm-unknown-linux-musleabi/bin/arm-unknown-linux-musleabi- \
+        CFLAGS="-Os -fPIC" libtinyalsa.a && \
+    make -C utils -j"$(nproc)" \
+        CROSS_COMPILE=/build/arm-unknown-linux-musleabi/bin/arm-unknown-linux-musleabi- \
+        CFLAGS="-Os -I ../include -fPIC" LDFLAGS="-static -L ../src" tinycap tinypcminfo && \
+    /build/arm-unknown-linux-musleabi/bin/arm-unknown-linux-musleabi-strip utils/tinycap utils/tinypcminfo && \
+    mkdir -p /out && cp utils/tinycap utils/tinypcminfo /out/ && \
+    file /out/tinycap /out/tinypcminfo

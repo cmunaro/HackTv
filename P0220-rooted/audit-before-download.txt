@@ -1,0 +1,13 @@
+DATE
+Tue Sep  8 17:41:08 GMT+1 2026
+CMDLINE
+cusdata_projectid=1 vmalloc=700M quiet console=ttyS0,115200 rootfstype=squashfs rw rootwait init=/init CORE_DUMP_PATH=/var/crash/core_dump.%e.%p.gz MIRROR=0 BOOTLOGO_IN_MBOOT ENV_VAR_OFFSET=0x0 ENV_VAR_SIZE=0x10000 ENV=EMMC FSTR=1 SECURITY=ON only_onerc_set=0 bootflag=0 root=/dev/mmcblk0p9 LX_MEM=0x5100000 LX_MEM2=0x4CF00000,0x33000000 EMAC_MEM=0x100000 PM51_ADDR=0x20010000 PM51_LEN=0x10000 tee_mode=optee SAR5=ON RTPM_INFO=1,0x20010000 otaflag=85
+SLOT_B_BEFORE
+7705de4652a151de20af379584ad77be  -
+79e49c0d3d68caafec7affcf16e51cc4  -
+467da19dcf6dd283059e5dde01c0f742  -
+SLOT_A_ACTIVE
+8d79fce5395ec8114c5faf1e63de48d6  -
+BOOTFLAG
+00000000  00 00 00 00 55 55 00 55                           |....UU.U|
+00000008

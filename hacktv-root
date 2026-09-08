@@ -1,0 +1,12 @@
+#!/bin/sh
+
+TV_IP="${1:-192.168.1.21}"
+KEY="/Users/cmunaro/.ssh/id_rsa"
+
+exec ssh -T \
+    -o BatchMode=yes \
+    -o StrictHostKeyChecking=accept-new \
+    -p 2222 \
+    -i "$KEY" \
+    "root@${TV_IP}" \
+    '/bin/sh -i'

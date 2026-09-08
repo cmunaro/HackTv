@@ -1,0 +1,17 @@
+DATE
+Tue Sep  8 17:11:51 GMT+1 2026
+CMDLINE
+cusdata_projectid=1 vmalloc=700M quiet console=ttyS0,115200 rootfstype=squashfs rw rootwait init=/init CORE_DUMP_PATH=/var/crash/core_dump.%e.%p.gz MIRROR=0 BOOTLOGO_IN_MBOOT ENV_VAR_OFFSET=0x0 ENV_VAR_SIZE=0x10000 ENV=EMMC FSTR=1 SECURITY=ON only_onerc_set=0 bootflag=1 root=/dev/mmcblk0p10 LX_MEM=0x5100000 LX_MEM2=0x4CF00000,0x33000000 EMAC_MEM=0x100000 PM51_ADDR=0x20010000 PM51_LEN=0x10000 tee_mode=optee SAR5=ON RTPM_INFO=1,0x20010000 otaflag=85
+VERSION
+SSH
+ 1073 root     /usr/sbin/hacktv-dropbear -E -F -p 2222 -r /var/local/hacktv/dropbear_rsa_host_key -s -j -k
+ 4071 root     /usr/sbin/hacktv-dropbear -E -F -p 2222 -r /var/local/hacktv/dropbear_rsa_host_key -s -j -k -2 8
+-rwxr-xr-x    1 root     root           784 Sep  8 15:52 /etc/init.d/hacktv_ssh.sh
+-rw-------    1 root     root           733 Sep  8 15:52 /root/.ssh/authorized_keys
+-rwxr-xr-x    1 root     root        317172 Sep  8 15:52 /usr/sbin/hacktv-dropbear
+-rwxr-xr-x    1 root     root        197812 Sep  8 15:52 /usr/sbin/hacktv-dropbearkey
+ROOTFS_HASH
+e1cf311e44b5a0a66478f4dd34c5a8c7  -
+BOOTFLAG
+00000000  01 00 00 00 55 55 00 55                           |....UU.U|
+00000008

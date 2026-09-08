@@ -1,0 +1,130 @@
+timestamp=Tue Sep  8 16:58:12 GMT+1 2026
+cmdline=cusdata_projectid=1 vmalloc=700M quiet console=ttyS0,115200 rootfstype=squashfs rw rootwait init=/init CORE_DUMP_PATH=/var/crash/core_dump.%e.%p.gz MIRROR=0 bootflag=0 root=/dev/mmcblk0p9 BOOTLOGO_IN_MBOOT ENV_VAR_OFFSET=0x0 ENV_VAR_SIZE=0x10000 ENV=EMMC FSTR=1 SECURITY=ON only_onerc_set=0 otaflag=0 LX_MEM=0x5100000 LX_MEM2=0x4CF00000,0x33000000 EMAC_MEM=0x100000 PM51_ADDR=0x20010000 PM51_LEN=0x10000 tee_mode=optee SAR5=ON RTPM_INFO=1,0x20010000
+
+[block-map]
+mmcblk0p1 name=MBOOT start=4096 sectors=8192
+mmcblk0p10 name=RFSB start=205320 sectors=73728
+mmcblk0p11 name=optee start=279048 sectors=12288
+mmcblk0p12 name=opteeB start=291336 sectors=12288
+mmcblk0p13 name=armfw start=303624 sectors=128
+mmcblk0p14 name=armfwB start=303752 sectors=128
+mmcblk0p15 name=swap start=303880 sectors=204800
+mmcblk0p16 name=dtb start=508680 sectors=1024
+mmcblk0p17 name=RTPM start=509704 sectors=512
+mmcblk0p18 name=tvservice start=510216 sectors=634880
+mmcblk0p19 name=noneA start=1145096 sectors=8
+mmcblk0p2 name=MPOOL start=12288 sectors=12288
+mmcblk0p20 name=tvconfig start=1145104 sectors=32768
+mmcblk0p21 name=tvcommon start=1177872 sectors=8192
+mmcblk0p22 name=tvcustomer start=1186064 sectors=204800
+mmcblk0p23 name=tvdatabase start=1390864 sectors=16384
+mmcblk0p24 name=criticaldata start=1407248 sectors=16384
+mmcblk0p25 name=modeldata start=1423632 sectors=61440
+mmcblk0p26 name=usrfs start=1485072 sectors=491520
+mmcblk0p27 name=noneB start=1976592 sectors=8
+mmcblk0p28 name=optfs start=1976600 sectors=1331200
+mmcblk0p29 name=varlfs start=3307800 sectors=696320
+mmcblk0p3 name=MBOOTBAK start=24576 sectors=8192
+mmcblk0p30 name=certificate start=4004120 sectors=8192
+mmcblk0p31 name=noneC start=4012312 sectors=8
+mmcblk0p32 name=servicedata start=4012320 sectors=32768
+mmcblk0p33 name=factorydata start=4045088 sectors=8192
+mmcblk0p34 name=serialdata start=4053280 sectors=307200
+mmcblk0p35 name=cacert start=4360480 sectors=32768
+mmcblk0p36 name=apps start=4393248 sectors=1228800
+mmcblk0p37 name=oad start=5622048 sectors=2048000
+mmcblk0p4 name=bootflag start=65536 sectors=8
+mmcblk0p5 name=bootinfo start=65544 sectors=256
+mmcblk0p6 name=devinfo start=65800 sectors=256
+mmcblk0p7 name=KL start=66056 sectors=32768
+mmcblk0p8 name=KLB start=98824 sectors=32768
+mmcblk0p9 name=RFS start=131592 sectors=73728
+
+[bootflag-first-4k]
+99d041f414e9b924e27a3e720a4fa59d  /dev/mmcblk0p4
+00000000  01 00 00 00 aa 00 00 55  00 00 00 00 00 00 00 00  |.......U........|
+00000010  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+*
+00000200  72 65 62 6f 6f 74 00 00  00 00 00 00 00 00 00 00  |reboot..........|
+00000210  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+*
+00001000
+
+[ab-image-prefixes]
+8aa46bef2cbd3d01486807f999cfb43b  KL
+79e49c0d3d68caafec7affcf16e51cc4  KLB
+e242ac031d853e04846f2c005721a568  RFS
+fd493146187c40070174e8173cf7139e  RFSB
+be671b36dfefdf2460ffe2822df2bc2b  optee
+467da19dcf6dd283059e5dde01c0f742  opteeB
+bc3d1788968b06ca8a96c3b1470321e1  armfw
+bc3d1788968b06ca8a96c3b1470321e1  armfwB
+
+[oad]
+Filesystem                Size      Used Available Use% Mounted on
+/dev/mmcblk0p37         968.6M    563.7M    388.9M  59% /OAD
+-rw-r--r--    1 2910     2910        441262 Oct  9  2023 /OAD/factorykey.log
+-rw-r--r--    1 2910     2910       4194326 Jul 27  2023 /OAD/factorykey_1.log
+-rw-r--r--    1 10021    10021    585114450 Sep  8 16:57 /OAD/patch_package.zip
+a9e887a037d26c5d033f5b0f1c177a6e  /OAD/patch_package.zip
+
+[updater-state]
+-rwxrwxrwx    1 0        0          1165404 Nov  3  2021 /var/local/upgrade/libcrypto.so.1.0.0
+-rwxrwxrwx    1 0        0           257368 Nov  3  2021 /var/local/upgrade/libssl.so.1.0.0
+-rwxrwxrwx    1 0        0         17151049 Nov  3  2021 /var/local/upgrade/uming.ttc
+-rwxrwxrwx    1 10021    10021          537 Sep  8 16:54 /var/local/upgrade/authentication_result_data.xml
+-rwxrwxrwx    1 10021    10021            3 Sep  8 16:54 /var/local/upgrade/am_tv_lang
+-rwxrwxrwx    1 10021    10021         1354 Sep  8 16:54 /var/local/upgrade/check_version_result_data.xml
+-rwxrwxrwx    1 10021    10021          122 Sep  8 16:57 /var/local/upgrade/report_upgrade_event_result_data.xml
+---x--xr--    1 10021    10021            0 Sep  8 16:54 /var/local/upgrade/ota_manual_check_flag
+-rw-r--r--    1 10001    10001          406 Sep  8 16:49 /tmp/YouTube
+-rw-r--r--    1 10009    10009            0 Sep  8 16:49 /tmp/reportdeviceinfo.json
+-rw-rw-rw-    1 10009    10009          537 Sep  8 16:48 /tmp/notifyAuth.xml
+-rw-rw-rw-    1 10009    10009          175 Sep  8 16:48 /tmp/AQPQ.json
+-rw-rw-rw-    1 10009    10009          162 Sep  8 16:48 /tmp/KillSwitch.json
+-rw-r--r--    1 10009    10009          537 Sep  8 16:48 /tmp/launcherServiceAuth.xml
+-rw-r--r--    1 10009    10009           15 Sep  8 16:48 /tmp/basedomin
+-rw-r--r--    1 2910     2910            20 Sep  8 16:48 /tmp/device_id
+-rw-r--r--    1 2910     2910            16 Sep  8 16:48 /tmp/webengine_dfb_window_id
+-rw-rw-rw-    1 2910     2910             4 Sep  8 16:48 /tmp/pid_hisenseBrowser
+-rw-rw-rw-    1 10009    10009            1 Sep  8 16:48 /tmp/InitFinished
+-rw-r--r--    1 10021    10021          537 Sep  8 16:48 /tmp/appupgradeTokenFile.xml
+-rw-r--r--    1 2910     2910            73 Sep  8 16:47 /tmp/foxxum_ua.ini
+-rw-r--r--    1 2910     2910             9 Sep  8 16:47 /tmp/bbciplayerstatus.ini
+-rw-r--r--    1 2910     2910            13 Sep  8 16:47 /tmp/bbccatalstatus.ini
+-rw-r--r--    1 2910     2910            15 Sep  8 16:47 /tmp/youtubestatus.ini
+-rwxrwxrwx    1 2910     2910             0 Sep  8 16:47 /tmp/tv_api_is_init
+-rwxrwxrwx    1 1009     1009      26329440 Sep  8 12:04 /tmp/lo_002/MstarUpgrade.bin
+-rwxrwxrwx    1 1009     1009          4096 Sep  8  2026 /tmp/lo_002/._MstarUpgrade.bin
+-rw-rw-rw-    1 2910     2910        204800 Jan  1  1970 /tmp/fusion.0.4
+-rw-rw-rw-    1 2910     2910         61440 Jan  1  1970 /tmp/fusion.0.3
+-rw-rw-rw-    1 2910     2910       2887680 Sep  8 16:48 /tmp/fusion.0.2
+-rw-rw-rw-    1 2910     2910         65536 Sep  8 16:48 /tmp/fusion.0.1
+-rw-r--r--    1 0        0                0 Jan  1  1970 /tmp/otayoutube
+--- /var/local/upgrade/authentication_result_data.xml
+[redacted]
+--- /var/local/upgrade/check_version_result_data.xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><response><resultCode>0</resultCode><latestVersion>L1103_to_M0518</latestVersion><updateFlag>1</updateFlag><updateType>0</updateType><versionDesc>A new software version is now available, it includes important updates which will enhance the operation of your TV.
+
+Updates include:
+
+- VIDAA U4.4 platform release
+- Application enhancements
+- Software bug fixes
+
+IT IS HIGHLY RECOMMENDED TO PERFORM THIS SOFTWARE UPDATE
+
+Please select 'Upgrade' to begin. 
+   
+A message will appear to confirm the SW has been downloaded and is ready to be installed
+
+Select ‘Restart now’ to install the SW update</versionDesc><areaId>11</areaId><areaName>德国</areaName><releaseTime>2022-06-21 16:00:00</releaseTime><packageType>1</packageType><fileNum>1</fileNum><eulaUrl></eulaUrl><eulaChkSum></eulaChkSum><dppUrl></dppUrl><dppChkSum></dppChkSum><dppSHA256Sum></dppSHA256Sum><eulaSHA256Sum></eulaSHA256Sum><fileList><fileInfo><checkSum>a9e887a037d26c5d033f5b0f1c177a6e</checkSum><downloadUrl>https://ota-dl.vidaahub.com/ota/MSD6886EUU4/55A56EEVS064/patch_package_entire_20220518.zip</downloadUrl><fileName>9000000000001.zip</fileName><fileSize>122</fileSize><fileVersion>L1103_to_M0518</fileVersion><filetype>1</filetype><sha256Sum></sha256Sum></fileInfo></fileList><shardList/><ruleId>29176</ruleId></response>--- /var/local/upgrade/report_upgrade_event_result_data.xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><response><resultCode>0</resultCode><desc>success</desc></response>
+[processes-and-open-files]
+ 1824 ota_upgr /applications/bin/app_wrapper /usr/local/bin/ota_upgrade
+ 1828 ota_upgr ota_upgrade
+ 1829 ota_upgr /applications/bin/app_wrapper /usr/local/bin/app_upgrade
+ 1838 ota_upgr app_upgrade
+ 9651 root     sh -c /var/local/hacktv/ota-stage-audit.sh; ls -1t /var/local/hacktv/ota-audit-*.txt | head -1
+ 9652 root     {ota-stage-audit} /bin/sh /var/local/hacktv/ota-stage-audit.sh
+AUDIT_FILE=/var/local/hacktv/ota-audit-20260908-165812.txt

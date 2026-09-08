@@ -1,0 +1,109 @@
+diff --git a/pack.py b/pack.py
+index 4295c3f..a18885b 100644
+--- a/pack.py
++++ b/pack.py
+@@ -69,6 +69,7 @@ SCRIPT_FIRMWARE_FILE_NAME = main['SCRIPT_FIRMWARE_FILE_NAME']
+ DRAM_BUF_ADDR = main['DRAM_BUF_ADDR']
+ MAGIC_FOOTER = main['MAGIC_FOOTER']
+ HEADER_SIZE = utils.sizeInt(main['HEADER_SIZE'])
++RAW_TRAILER_FILE = main.get('RAW_TRAILER_FILE', fallback='').strip()
+ 
+ # XGIMI uses HEADER+BIN+MAGIC+HEADER_CRC to calculate crc2
+ if 'USE_XGIMI_CRC2' in main:
+@@ -273,6 +274,10 @@ with open(headerPart, 'wb') as header:
+ 		
+ 			
+ 	header.write('\n'.encode())
++	if RAW_TRAILER_FILE:
++		print ('[i] Appending vendor trailer: {}'.format(RAW_TRAILER_FILE))
++		utils.appendFile(RAW_TRAILER_FILE, binPart)
++
+ 	header.write('# Header suffix'.encode())
+ 	header.write(headerScriptSuffix.encode())
+ 	header.write('\n'.encode())
+@@ -299,13 +304,13 @@ if (USE_XGIMI_CRC2):
+ 		print ('[i]     Magic: {}'.format(MAGIC_FOOTER))
+ 		part.write(MAGIC_FOOTER.encode())
+ 		print ('[i]     Header CRC: 0x{:02X}'.format(headerCRC))
+-		part.write(struct.pack('L', headerCRC))
++		part.write(struct.pack('<I', headerCRC))
+ 	
+ 	# Step #2 Calculate CRC2
+ 	mergedCRC = utils.crc32(mergedPart)
+ 	with open(footerPart, 'wb') as footer:
+ 		print ('[i]     Merged CRC: 0x{:02X}'.format(mergedCRC))
+-		footer.write(struct.pack('L', mergedCRC))
++		footer.write(struct.pack('<I', mergedCRC))
+ 		print ('[i]     First 16 bytes of header: {}'.format(header16bytes))
+ 		footer.write(header16bytes)
+ 
+@@ -321,9 +326,9 @@ else:
+ 		print ('[i]     Magic: {}'.format(MAGIC_FOOTER))
+ 		footer.write(MAGIC_FOOTER.encode())
+ 		print ('[i]     Header CRC: 0x{:02X}'.format(headerCRC))
+-		footer.write(struct.pack('L', headerCRC)) # struct.pack('L', data) <- returns byte swapped data
++		footer.write(struct.pack('<I', headerCRC))
+ 		print ('[i]     Bin CRC: 0x{:02X}'.format(binCRC))
+-		footer.write(struct.pack('L', binCRC))
++		footer.write(struct.pack('<I', binCRC))
+ 		print ('[i]     First 16 bytes of header: {}'.format(header16bytes))
+ 		footer.write(header16bytes)
+ 
+diff --git a/utils.py b/utils.py
+index 9c13ea4..b643e82 100644
+--- a/utils.py
++++ b/utils.py
+@@ -5,6 +5,7 @@ import string
+ import binascii
+ import math
+ import ctypes
++import subprocess
+ 
+ B  = 2**00
+ KB = 2**10
+@@ -124,17 +125,30 @@ def alignFile(file, base = 0x1000):
+ 		with open(file, 'ab') as f:
+ 			f.write(('\xff' * result).encode(encoding='iso-8859-1'))
+ 
+-# unlzo
+-# if NT then use ./bin/lzo.exe
++def _lzop_binary():
++	"""Return a native lzop executable on Windows, Linux, or macOS."""
++	if os.name == 'nt':
++		return os.path.join('bin', 'win32', 'lzop.exe')
++
++	# Prefer a system/Homebrew binary. The repository's bundled binary, when
++	# present, is Linux x86 and cannot execute on Apple Silicon macOS.
++	system_lzop = shutil.which('lzop')
++	if system_lzop:
++		return system_lzop
++
++	bundled_lzop = os.path.join('bin', 'linux-x86', 'lzop')
++	if os.path.isfile(bundled_lzop):
++		return bundled_lzop
++
++	raise RuntimeError('lzop was not found; install it with: brew install lzop')
++
++
+ def unlzo(src, dest):
+-	lzop = 'bin\\win32\\lzop.exe' if os.name == 'nt' else 'bin/linux-x86/lzop'
+-	os.system(lzop + ' -o {} -d {}'.format(dest, src))
++	subprocess.run([_lzop_binary(), '-o', dest, '-d', src], check=True)
++
+ 
+-# lzo
+-# if NT then use ./bin/lzo.exe
+ def lzo(src, dest):
+-	lzop = 'bin\\win32\\lzop.exe' if os.name == 'nt' else 'bin/linux-x86/lzop'
+-	os.system(lzop + ' -o {} -1 {}'.format(dest, src))
++	subprocess.run([_lzop_binary(), '-o', dest, '-1', src], check=True)
+ 
+ # Calculate crc32
+ # file - filename of a file to calculate
+@@ -345,4 +359,4 @@ def writeFile(file, data):
+ 
+ def writeRSAPublicKey(file, key):
+ 	writeFile(file, 
+-		str.encode( "N = {}\nE = {}".format(hexString(key.N, ''), hexString(key.E, '')) ))
+\ No newline at end of file
++		str.encode( "N = {}\nE = {}".format(hexString(key.N, ''), hexString(key.E, '')) ))

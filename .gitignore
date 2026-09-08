@@ -1,0 +1,32 @@
+# macOS / Python noise
+.DS_Store
+__pycache__/
+*.pyc
+
+# Firmware payloads and extracted filesystem images (large, retained locally)
+*.bin
+*.img
+*.lzo
+*.zip
+*.squashfs
+
+# Nested upstream repository (base and local patch are recorded in patches/)
+mstar-bin-tool/
+
+# Build and extraction trees
+tmp/
+unpacked/
+ota-analysis/
+ota-downloads/
+dropbear-build/out/
+dropbear-build/tinyalsa-out/
+
+# Copied executable payloads and per-machine public keys
+*/tools/dropbear
+*/tools/dropbearkey
+*/tools/authorized_key.pub
+
+# Logs and temporary files
+*.log
+*.tmp
+*~
