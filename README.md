@@ -13,9 +13,11 @@ Current proven state (2026-09-08): P0220 boots from slot B
 Start with [RUNBOOK.md](RUNBOOK.md). Agent-specific safety and workspace rules
 are in [AGENTS.md](AGENTS.md).
 
-Large firmware files remain on the local disk but are deliberately excluded
-from Git. Their checksum manifests and the scripts that produced/installed
-them are versioned.
+The primary recovery payload hashes are in `RECOVERY-SHA256SUMS`.
+
+Recovery-critical firmware files are committed through Git LFS. A clone is
+not a complete backup until `git lfs pull` succeeds and the LFS objects are
+also present on the remote or backup medium.
 
 ## Quick access
 
@@ -31,7 +33,7 @@ The TV kernel has no usable PTY support, so the helper uses `ssh -T` and
 - `M0518-rooted/`
 - `N0423-rooted/`
 - `P0220-rooted/`
+- `L1103-rooted/` (downgrade/root recovery)
 
 Never edit a frozen set in place. Copy the required inputs into a new
 version-specific directory.
-

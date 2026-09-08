@@ -1,0 +1,15 @@
+usb_MICALIDVB6886_U4.bin filter=lfs diff=lfs merge=lfs -text
+L1103-rooted/*.bin filter=lfs diff=lfs merge=lfs -text
+L1103-rooted/*.img filter=lfs diff=lfs merge=lfs -text
+M0518-rooted/*.bin filter=lfs diff=lfs merge=lfs -text
+M0518-rooted/*.img filter=lfs diff=lfs merge=lfs -text
+M0518-rooted/official-M0518-OTA.zip filter=lfs diff=lfs merge=lfs -text
+N0423-rooted/*.zip filter=lfs diff=lfs merge=lfs -text
+N0423-rooted/*.img filter=lfs diff=lfs merge=lfs -text
+N0423-rooted/tools/* filter=lfs diff=lfs merge=lfs -text
+P0220-rooted/*.zip filter=lfs diff=lfs merge=lfs -text
+P0220-rooted/*.img filter=lfs diff=lfs merge=lfs -text
+P0220-rooted/tools/* filter=lfs diff=lfs merge=lfs -text
+dropbear-build/out/* filter=lfs diff=lfs merge=lfs -text
+dropbear-build/tinyalsa-out/* filter=lfs diff=lfs merge=lfs -text
+artifacts/*.bin filter=lfs diff=lfs merge=lfs -text

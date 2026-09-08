@@ -151,3 +151,9 @@ mksquashfs rootfs rootfs-rooted.img \
 - `dropbear-build/`: reproducible static Dropbear/TinyALSA build material
 - version directories: official/rooted hashes, guarded writers, audits, proofs
 
+## 8. Repository and backup
+
+Large recovery artifacts are Git LFS objects. After cloning, run
+`git lfs pull`, then verify the version-specific checksum manifests. A local
+commit alone is not an off-machine backup: push both Git history and LFS
+objects to a trusted remote or copy the complete repository to external media.
