@@ -147,7 +147,7 @@ mksquashfs rootfs rootfs-rooted.img \
 
 - `hacktv-root`, `hacktv-shell`: no-PTY SSH helpers
 - `ota-stage-audit.sh`: read-only partition/updater audit
-- `mstar-bin-tool/`: locally patched MStar unpacker/packer
+- `mstar-bin-tool/`: integrated, locally patched MStar unpacker/packer
 - `dropbear-build/`: reproducible static Dropbear/TinyALSA build material
 - version directories: official/rooted hashes, guarded writers, audits, proofs
 

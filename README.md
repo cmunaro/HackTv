@@ -15,9 +15,10 @@ are in [AGENTS.md](AGENTS.md).
 
 The primary recovery payload hashes are in `RECOVERY-SHA256SUMS`.
 
-Recovery-critical firmware files are committed through Git LFS. A clone is
-not a complete backup until `git lfs pull` succeeds and the LFS objects are
-also present on the remote or backup medium.
+Recovery-critical firmware files are committed through Git LFS. The patched
+`mstar-bin-tool/` source is integrated directly, so no secondary clone or
+patch step is required. A clone is not a complete backup until `git lfs pull`
+succeeds and the LFS objects are also present on the remote or backup medium.
 
 ## Quick access
 

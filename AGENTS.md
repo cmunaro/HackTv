@@ -25,8 +25,12 @@ is rooted P0220 on slot B (`bootflag=1`, `root=/dev/mmcblk0p10`).
 9. Remove every USB containing `MstarUpgrade.bin` before an OTA reboot.
 10. Never interrupt power during an update or slot transition.
 11. Do not expose authentication tokens from updater XML in logs or Git.
-12. Do not commit private SSH keys, firmware ZIPs/BINs/IMGs, extracted trees,
-    or copied ELF payloads. `.gitignore` enforces the common cases.
+12. Never commit private SSH keys or extracted working trees. Approved recovery
+    firmware and ELF payloads are already tracked through Git LFS; add new ones
+    only with checksums and explicit documentation.
+
+The patched `mstar-bin-tool/` source is integrated into this repository. Do
+not replace it with a new clone or reapply the archival patch.
 
 ## Root connection
 
@@ -60,4 +64,3 @@ reuse or unfreeze an older directory. Preserve the official OTA, official
 rootfs, rooted rootfs, guarded writer, before-download audit, post-boot proof,
 procedure, and checksum manifests in that directory, then freeze it read-only
 only after successful boot verification.
-

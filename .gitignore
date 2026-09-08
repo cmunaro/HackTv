@@ -10,9 +10,6 @@ __pycache__/
 *.zip
 *.squashfs
 
-# Nested upstream repository (base and local patch are recorded in patches/)
-mstar-bin-tool/
-
 # Build and extraction trees
 tmp/
 unpacked/
@@ -25,6 +22,9 @@ dropbear-build/tinyalsa-out/
 */tools/dropbear
 */tools/dropbearkey
 */tools/authorized_key.pub
+
+# Upstream sample encryption/signing keys are intentionally not published
+mstar-bin-tool/default_keys/
 
 # Logs and temporary files
 *.log
